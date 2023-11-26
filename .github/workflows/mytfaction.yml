@@ -1,3 +1,4 @@
+name: "TFcloud workflow"
 on:
   workflow_dispatch:
 jobs:
