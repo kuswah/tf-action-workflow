@@ -1,45 +1,44 @@
 # tf-action-workflow
 
+## Jenkinsfile pipeline code
 ```groovy
 pipeline {
     agent any
     
     environment {
-        TF_API_TOKEN = credentials('terraform-cloud-token')
+        TF_TOKEN_app_terraform_io = credentials('terraform-cloud-token')
+        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
     }
     
     stages {
         stage('Checkout') {
             steps {
-                // Checkout your repository
-                // Replace <repository_url> with your actual repository URL
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: '<repository_url>']]])
+                git branch: 'main', url: 'https://github.com/mevijays/tf-action-workflow.git'
             }
         }
         
         stage('Terraform Init') {
             steps {
                 // Install Terraform
-                sh 'curl -LO https://releases.hashicorp.com/terraform/0.15.0/terraform_0.15.0_darwin_amd64.zip'
-                sh 'unzip terraform_0.15.0_darwin_amd64.zip'
-                sh 'mv terraform /usr/local/bin/'
-                
-                // Initialize Terraform
-                sh 'terraform init'
+                sh 'curl -LO https://releases.hashicorp.com/terraform/1.6.5/terraform_1.6.5_linux_amd64.zip'
+                sh 'unzip terraform_1.6.5_linux_amd64.zip'
+            // Initialize Terraform
+                sh './terraform init'
             }
         }
         
         stage('Terraform Plan') {
             steps {
                 // Run Terraform plan
-                sh 'terraform plan'
+                sh './terraform plan'
             }
         }
         
         stage('Terraform Apply') {
             steps {
                 // Run Terraform apply
-                sh 'terraform apply -auto-approve'
+                sh './terraform apply -auto-approve'
             }
         }
     }
