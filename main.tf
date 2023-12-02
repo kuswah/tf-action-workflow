@@ -19,7 +19,6 @@ provider "aws" {
 }
 
 module "mymod" {
-  count = 2
   source  = "app.terraform.io/mevijays/testmod/aws"
   version = "1.0.0"
   instance_type = "t2.micro"
