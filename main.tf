@@ -7,7 +7,7 @@ terraform {
     }
   }
   cloud {
-    organization = "krlab"
+    organization = "mevijays"
 
     workspaces {
       name = "clidriven"
@@ -20,7 +20,7 @@ provider "aws" {
 
 module "mymod" {
   count = 2
-  source  = "app.terraform.io/krlab/mytfmod/aws"
+  source  = "app.terraform.io/mevijays/testmod/aws"
   version = "1.0.0"
   ec2_type = "t2.micro"
   ec2_tags = {Name = "myapp${count.index}", environment = "development"}
