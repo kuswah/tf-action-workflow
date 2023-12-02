@@ -26,5 +26,5 @@ module "mymod" {
   instance_tags = {Name = "myapp${count.index}", environment = "development"}
 }
 output "public_ip" {
-  value = module.mymod[*].instance_public_ip
+  value = module.mymod[*].public_ip
 }
