@@ -17,7 +17,11 @@ pipeline {
                 // Install Terraform
                 sh 'curl -LO https://releases.hashicorp.com/terraform/1.6.5/terraform_1.6.5_linux_amd64.zip'
                 sh 'unzip terraform_1.6.5_linux_amd64.zip'
-                sh 'mv terraform /usr/local/bin/'
+                sh '''
+                    mkdir bin
+                    mv terraform bin
+                    export PATH=$PATH:~/bin
+                '''
                 
                 // Initialize Terraform
                 sh 'terraform init'
