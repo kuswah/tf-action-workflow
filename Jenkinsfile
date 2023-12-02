@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        TF_API_TOKEN = credentials('terraform-cloud-token')
+        TF_TOKEN_app_terraform_io = credentials('terraform-cloud-token')
     }
     
     stages {
