@@ -22,7 +22,7 @@ module "mymod" {
   source  = "app.terraform.io/mevijays/testmod/aws"
   version = "1.0.0"
   instance_type = "t2.micro"
-  instance_tags = {Name = "myapp${count.index}", environment = "development"}
+  instance_tags = {Name = "myapp", environment = "development"}
 }
 output "public_ip" {
   value = module.mymod[*].public_ip
