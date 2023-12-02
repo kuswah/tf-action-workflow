@@ -17,28 +17,22 @@ pipeline {
                 // Install Terraform
                 sh 'curl -LO https://releases.hashicorp.com/terraform/1.6.5/terraform_1.6.5_linux_amd64.zip'
                 sh 'unzip terraform_1.6.5_linux_amd64.zip'
-                sh '''
-                    mkdir bin
-                    mv terraform /home/jenkins/bin/
-                    export PATH=$PATH:~/bin
-                '''
-                
-                // Initialize Terraform
-                sh 'terraform init'
+            // Initialize Terraform
+                sh './terraform init'
             }
         }
         
         stage('Terraform Plan') {
             steps {
                 // Run Terraform plan
-                sh 'terraform plan'
+                sh './terraform plan'
             }
         }
         
         stage('Terraform Apply') {
             steps {
                 // Run Terraform apply
-                sh 'terraform apply -auto-approve'
+                sh './terraform apply -auto-approve'
             }
         }
     }
