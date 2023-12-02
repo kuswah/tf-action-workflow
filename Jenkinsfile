@@ -19,7 +19,7 @@ pipeline {
                 sh 'unzip terraform_1.6.5_linux_amd64.zip'
                 sh '''
                     mkdir bin
-                    mv terraform bin
+                    mv terraform /home/jenkins/bin/
                     export PATH=$PATH:~/bin
                 '''
                 
