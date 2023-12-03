@@ -1,3 +1,4 @@
+//This is parameterized build so create parameter name as action and type as choice with 2 option as apply and destroy
 pipeline {
     agent any
     
@@ -32,9 +33,21 @@ pipeline {
         }
         
         stage('Terraform Apply') {
+            when {
+                expression { params.action == "apply" }
+            }
             steps {
                 // Run Terraform apply
                 sh './terraform apply -auto-approve'
+            }
+        }
+        stage('Terraform Destroy') {
+            when {
+                expression { params.action == "destroy" }
+            }
+            steps {
+                // Run Terraform destroy
+                sh './terraform apply --destroy --auto-approve'
             }
         }
     }
